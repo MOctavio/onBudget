@@ -1,7 +1,41 @@
-html {
-    font-size: 16px;
+body {
+    background-color: gainsboro;
+    font-size: 21px;
+    margin: 0px;
 }
 
-.container {
-    display: grid;
+section.header {
+    position: relative;
 }
+
+section.background-image {
+    background-image: url('gabriel-vissoto-175995.jpg');
+    background-size: contain;
+    height: 300px;
+}
+
+section article.box {
+    display: inline-block;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+section.header article {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+section article p, section article h1 {
+    color: rgb(36, 36, 36);
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+/*.container {
+    grid-template-columns: 40px 50px auto 50px 40px;
+    grid-template-rows: 25% 100px auto;
+}*/
