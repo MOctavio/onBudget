@@ -1,41 +1,80 @@
 body {
     background-color: gainsboro;
+    font-family: Tahoma, Geneva, sans-serif;
     font-size: 21px;
+    line-height: 100%;
+    font-weight: lighter;
     margin: 0px;
+}
+
+.container {
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0);
+}
+
+.menu-bar {
+    background-color: darkgray;
+    height: 42px;
+}
+
+
+/* Section Header */
+
+section.background-image {
+    background-image: url('robert-lamb-5397.jpg');
+    background-size: cover;
+    height: 250px;
 }
 
 section.header {
     position: relative;
 }
 
-section.background-image {
-    background-image: url('gabriel-vissoto-175995.jpg');
-    background-size: contain;
-    height: 300px;
-}
-
-section article.box {
-    display: inline-block;
-    padding: 25px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-}
-
 section.header article {
     left: 50%;
     position: absolute;
-    top: 50%;
+    top: 30%;
     transform: translate(-50%, -50%);
 }
 
-section article p, section article h1 {
-    color: rgb(36, 36, 36);
-    text-align: center;
-    white-space: nowrap;
+
+/* Article Box */
+
+article.box {
+    padding: 2px;
+    margin: 4px;
 }
 
+article.box h1 {
+    text-align: center;
+}
 
-/*.container {
-    grid-template-columns: 40px 50px auto 50px 40px;
-    grid-template-rows: 25% 100px auto;
-}*/
+article.box * {
+    color: gainsboro;
+}
+
+article.box label {
+    color: rgb(54, 54, 54);
+}
+
+article.box.incomes {
+    background-color: rgb(45, 166, 144);
+}
+
+article.box.expenses {
+    background-color: rgb(231, 55, 80);
+}
+
+article.box.expenses, article.box.incomes {
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 16px;
+}
+
+article.box.expenses p, article.box.incomes p {
+    display: inline-block;
+    float: right;
+    margin: 0px;
+}
