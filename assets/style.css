@@ -1,0 +1,123 @@
+body {
+    background-color: gainsboro;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 21px;
+    line-height: 100%;
+    font-weight: lighter;
+    margin: 0px;
+}
+
+.container {
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0);
+}
+
+.menu-bar {
+    background-color: darkgray;
+    height: 42px;
+    line-height: 36px;
+    padding: 0.4em;
+    text-align: center;
+}
+
+
+/* Buttons */
+
+.btn {
+    background-clip: padding-box;
+    background-color: #fff;
+    border-radius: .25rem;
+    border: 1px solid rgba(0, 0, 0, .15);
+    color: #464a4c;
+    font-size: 1rem;
+    padding: .5rem .75rem;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    vertical-align: text-bottom;
+}
+
+
+/* Icons */
+
+.icon {
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 18px;
+    vertical-align: bottom;
+    width: 18px;
+}
+
+.check {
+    background-image: url(check.svg), none;
+}
+
+
+/* Form */
+
+.form-horizontal input, .form-horizontal select {
+    background-clip: padding-box;
+    background-color: #fff;
+    border-radius: .25rem;
+    border: 1px solid rgba(0, 0, 0, .15);
+    color: #464a4c;
+    font-size: 1rem;
+    padding: .5rem .75rem;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    vertical-align: text-bottom;
+}
+
+
+}
+.form-horizontal select {
+    height: 21px;
+}
+
+/* Section Header */
+section.background-image {
+    background-image: url('robert-lamb-5397.jpg');
+    background-size: cover;
+    height: 250px;
+}
+section.header {
+    position: relative;
+}
+section.header article {
+    left: 50%;
+    position: absolute;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+
+/* Article Box */
+article.box {
+    margin: 4px;
+    background-clip: padding-box;
+    border-radius: .25rem;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+}
+article.box h1 {
+    text-align: center;
+}
+article.box * {
+    color: gainsboro;
+}
+article.box label {
+    color: rgb(54, 54, 54);
+}
+article.box.incomes {
+    background-color: rgb(45, 166, 144);
+}
+article.box.expenses {
+    background-color: rgb(231, 55, 80);
+}
+article.box.expenses, article.box.incomes {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+article.box.expenses p, article.box.incomes p {
+    display: inline-block;
+    float: right;
+    margin: 0 0 0 10px;
+}

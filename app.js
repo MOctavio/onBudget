@@ -1,11 +1,14 @@
-var budgetController = (function BudgetController() {
+(function() {
+    console.info('App initialized');
 
-});
-var UIController = (function UIController() {
-
-});
-var AppController = (function AppController(BudgetController, UIController) {
-    document.querySelector('.add-btn').addEventListener('click', function () {
-        console.log('Cliked!');
+    var budgetController = (function BudgetController() {});
+    var UIController = (function UIController() {});
+    var AppController = (function AppController(BudgetController, UIController) {
+        document.querySelector('.btn-add').addEventListener('click', function(event) {
+            event.preventDefault();
+            console.log('Cliked!');
+        });
     });
-});
+
+    AppController();
+})();
