@@ -14,7 +14,7 @@ body {
     transform: translate(-50%, 0);
 }
 
-.menu-bar {
+.panel {
     background-color: darkgray;
     height: 42px;
     line-height: 36px;
