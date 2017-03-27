@@ -1,4 +1,44 @@
-var budgetController = (function BudgetController() {})();
+var budgetController = (function BudgetController() {
+    var data = {
+        items: {
+            inc: [],
+            exp: []
+        },
+        totals: {
+            inc: 0,
+            exp: 0
+        }
+    };
+    var Expense = function(id, description, value) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+    var Income = function(id, description, value) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+
+    function _addItem(type, description, value) {
+        var newItem,
+            id = 0;
+        // New id base on last id number
+        if (data.items[type].length)
+            id = data.items[type][data.items[type].length - 1].id + 1;
+
+        if (type === 'exp') {
+            newItem = new Expense(id, description, value);
+        } else if (type === 'inc') {
+            newItem = new Income(id, description, value);
+        }
+
+        data.items[type].push(newItem);
+        console.log(data);
+        return newItem;
+    }
+    return {addItem: _addItem};
+})();
 
 var uIController = (function UIController() {
     var DOMSelector = {
@@ -21,10 +61,13 @@ var uIController = (function UIController() {
     return {getInput: _getInput, getDOMSelector: _getDOMSelector};
 })();
 
-var AppController = (function AppController(budgetController, uIController) {
+var appController = (function AppController(budgetController, uIController) {
     function addItem(event) {
-      event.preventDefault();
-      console.log('Event to add an has been entry registered.');
+        event.preventDefault();
+        var item,
+            newItem;
+        item = uIController.getInput();
+        newItem = budgetController.addItem(item.type, item.description, item.value);
     }
 
     function setupEventListeners() {
@@ -40,9 +83,9 @@ var AppController = (function AppController(budgetController, uIController) {
     }
 
     function _init() {
-      setupEventListeners();
+        setupEventListeners();
     }
     return {init: _init};
 })(budgetController, uIController);
 
-AppController.init();
+appController.init();
