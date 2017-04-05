@@ -37,7 +37,9 @@ var budgetController = (function BudgetController() {
         console.log(data);
         return newItem;
     }
-    return {addItem: _addItem};
+    return {
+        addItem: _addItem
+    };
 })();
 
 var uIController = (function UIController() {
@@ -51,6 +53,7 @@ var uIController = (function UIController() {
     function _getDOMSelector() {
         return DOMSelector;
     }
+
     function _getInput() {
         return {
             type: document.querySelector(DOMSelector.inputType).value,
@@ -58,7 +61,24 @@ var uIController = (function UIController() {
             value: document.querySelector(DOMSelector.inputValue).value
         };
     }
-    return {getInput: _getInput, getDOMSelector: _getDOMSelector};
+
+    var config = new LiquidFillSettings();
+    config.circleColor = 'rgb(23, 161, 83)';
+    config.circleThickness = 0.02;
+    config.textColor = 'rgb(23, 161, 83)';
+    config.textVertPosition = 0.5;
+    config.textSize = 0.6;
+    config.waveAnimateTime = 4000;
+    config.waveTextColor = 'gainsboro';
+    config.waveColor = 'rgb(23, 161, 83)';
+
+    var budgetChart = loadLiquidFill('.js-budget-chart', 75, config);
+    // budgetChart.update(50);
+
+    return {
+        getInput: _getInput,
+        getDOMSelector: _getDOMSelector
+    };
 })();
 
 var appController = (function AppController(budgetController, uIController) {
@@ -85,7 +105,9 @@ var appController = (function AppController(budgetController, uIController) {
     function _init() {
         setupEventListeners();
     }
-    return {init: _init};
+    return {
+        init: _init
+    };
 })(budgetController, uIController);
 
 appController.init();

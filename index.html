@@ -4,25 +4,17 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link href="assets/style.css" rel="stylesheet" title="Main Style">
+    <link href="assets/styles/main.css" rel="stylesheet" title="Main Style">
 </head>
 
 <body>
     <section class="header background-image"></section>
     <section class="container">
         <article class="box">
-            <h1>+ 1,2680.09</h1>
-            <p>Budget in March</p>
+            <p>Available Budget</p>
+            <h1>+ 326.800,09</h1>
         </article>
-
-        <article class="box incomes">
-            <label>Incomes</label>
-            <p>+ 2,354.64</p>
-        </article>
-        <article class="box expenses">
-            <label>Expenses</label>
-            <p>- 1,954.64</p>
-        </article>
+        <svg class="js-budget-chart"></svg>
     </section>
     <section class="panel form-horizontal">
         <select class="js-add-type">
@@ -33,6 +25,8 @@
         <input type="number" class="js-add-value" placeholder="Value">
         <button class="btn js-add-btn"><span class="icon check"></span>Add</button>
     </section>
+    <script src="assets/scripts/d3.v4.min.js"></script>
+    <script src="assets/scripts/liquid-fill-d3.js"></script>
     <script src="app.js"></script>
 </body>
 
