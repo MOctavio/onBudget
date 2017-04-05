@@ -50,6 +50,9 @@ var uIController = (function UIController() {
         btnAdd: '.js-add-btn'
     };
 
+    var budgetChart = _initBudgetChart();
+    // budgetChart.update(50);
+
     function _getDOMSelector() {
         return DOMSelector;
     }
@@ -62,18 +65,18 @@ var uIController = (function UIController() {
         };
     }
 
-    var config = new LiquidFillSettings();
-    config.circleColor = 'rgb(23, 161, 83)';
-    config.circleThickness = 0.02;
-    config.textColor = 'rgb(23, 161, 83)';
-    config.textVertPosition = 0.5;
-    config.textSize = 0.6;
-    config.waveAnimateTime = 4000;
-    config.waveTextColor = 'gainsboro';
-    config.waveColor = 'rgb(23, 161, 83)';
-
-    var budgetChart = loadLiquidFill('.js-budget-chart', 75, config);
-    // budgetChart.update(50);
+    function _initBudgetChart() {
+        var config = new LiquidFillSettings();
+        config.circleColor = 'rgb(23, 161, 83)';
+        config.circleThickness = 0.02;
+        config.textColor = 'rgb(23, 161, 83)';
+        config.textVertPosition = 0.5;
+        config.textSize = 0.6;
+        config.waveAnimateTime = 4000;
+        config.waveTextColor = 'gainsboro';
+        config.waveColor = 'rgb(23, 161, 83)';
+        return loadLiquidFill('.js-budget-chart', 75, config);
+    }
 
     return {
         getInput: _getInput,

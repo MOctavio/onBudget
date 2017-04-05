@@ -1,5 +1,5 @@
 body {
-    background-color: gainsboro;
+    background-color: rgb(52, 51, 51);
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 21px;
     font-weight: lighter;
@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-    background-color: #1d1d1d;
+    background-color: rgb(37, 37, 37);
     border-radius: 0 0 8px 8px;
     left: 22vw;
     padding: 15px;
@@ -18,8 +18,8 @@ body {
 }
 
 .panel {
-    background-color: darkgray;
-    height: 42px;
+    background-color: rgb(37, 37, 37);
+    height: 38px;
     line-height: 36px;
     padding: 0.4em;
     text-align: center;
@@ -78,7 +78,7 @@ body {
 
 /* Section Header */
 section.background-image {
-    background-image: url('../img/robert-katzki-119134.jpg');
+    background-image: url('../img/kimon-maritz-193428.jpg');
     background-size: cover;
     height: 290px;
 }
