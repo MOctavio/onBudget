@@ -6,17 +6,12 @@ body {
     line-height: 100%;
     margin: 0px;
 }
-
 .container {
-    background-color: rgb(37, 37, 37);
-    border-radius: 0 0 8px 8px;
-    left: 22vw;
-    padding: 15px;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, 0);
+    margin: auto;
+    max-width: 800px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
-
 .panel {
     background-color: rgb(37, 37, 37);
     height: 38px;
@@ -71,20 +66,28 @@ body {
 }
 
 
-}
-.form-horizontal select {
-    height: 21px;
+/* Section Header */
+
+section.ribbon {
+    background-color: rgb(37, 37, 37);
+    border-radius: 0 0 8px 8px;
+    left: 22vw;
+    padding: 15px;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0);
 }
 
-/* Section Header */
 section.background-image {
     background-image: url('../img/kimon-maritz-193428.jpg');
     background-size: cover;
     height: 290px;
 }
+
 section.header {
     position: relative;
 }
+
 section.header article {
     left: 50%;
     position: absolute;
@@ -92,19 +95,25 @@ section.header article {
     transform: translate(-50%, -50%);
 }
 
+
 /* Article Box */
+
 article.box {
     font-size: 1rem;
 }
+
 article.box * {
     color: gainsboro;
     text-align: center;
 }
+
 article.box h1 {
     font-weight: normal;
 }
 
+
 /* SVG */
+
 svg {
     -ms-transform: translateX(-50%);
     height: 141px;
@@ -115,25 +124,27 @@ svg {
     width: 141px;
 }
 
+
 /* Wave */
+
 .water-fill {
     -webkit-animation: wave 0.7s infinite linear, fill-up 10s infinite ease-out alternate;
     animation: wave 0.7s infinite linear, fill-up 10s infinite ease-out alternate;
 }
+
 @-webkit-keyframes wave {
     0% {
         x: -400px;
     }
-
     100% {
         x: 0;
     }
 }
+
 @keyframes wave {
     0% {
         x: -400px;
     }
-
     100% {
         x: 0;
     }

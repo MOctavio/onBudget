@@ -27,10 +27,10 @@ var budgetController = (function BudgetController() {
         if (data.items[type].length)
             id = data.items[type][data.items[type].length - 1].id + 1;
 
-        if (type === 'exp') {
-            newItem = new Expense(id, description, value);
-        } else if (type === 'inc') {
+        if (type === 'inc') {
             newItem = new Income(id, description, value);
+        } else if (type === 'exp') {
+            newItem = new Expense(id, description, value);
         }
 
         data.items[type].push(newItem);
@@ -52,6 +52,23 @@ var uIController = (function UIController() {
 
     var budgetChart = _initBudgetChart();
     // budgetChart.update(50);
+
+    function _addListItem(item, type) {
+        var html, element;
+        // Create HTML string with placeholder text
+
+        if (type === 'inc') {
+            element = DOMstrings.incomeContainer;
+            html = '<div class="item clearfix" id="inc-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item-value">%value%</div><div class="item-delete"><button class="item-delete-btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+        } else if (type === 'exp') {
+            element = DOMstrings.expensesContainer;
+            html = '<div class="item clearfix" id="exp-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item-value">%value%</div><div class="item-percentage">21%</div><div class="item-delete"><button class="item-delete-btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+        }
+
+        html = html.replace('%id%', item.id)
+            .replace('%description%', item.description)
+            .replace('%value%', item.value);
+    }
 
     function _getDOMSelector() {
         return DOMSelector;
@@ -79,8 +96,9 @@ var uIController = (function UIController() {
     }
 
     return {
+        addListItem: _addListItem,
+        getDOMSelector: _getDOMSelector,
         getInput: _getInput,
-        getDOMSelector: _getDOMSelector
     };
 })();
 
