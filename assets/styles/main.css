@@ -25,7 +25,8 @@ body {
     border-top: solid darkgray;
     padding-top: 10px;
 }
-.item + .item {
+
+.item+.item {
     margin-top: 10px;
 }
 
@@ -101,13 +102,18 @@ body {
 .icon {
     background-repeat: no-repeat;
     display: inline-block;
-    height: 18px;
-    vertical-align: bottom;
-    width: 18px;
+    height: 12px;
+    width: 12px;
 }
 
-.check {
-    background-image: url('../svg/check.svg'), none;
+.add {
+    background-image: url('../svg/add.svg'), none;
+    background-size: 12px 12px;
+}
+
+.delete {
+    background-image: url('../svg/delete.svg'), none;
+    background-size: 12px 12px;
 }
 
 
