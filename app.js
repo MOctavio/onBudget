@@ -59,10 +59,10 @@ var uIController = (function UIController() {
 
         if (type === 'inc') {
             element = DOMSelector.incomeList;
-            html = '<div class="item clearfix" id="inc-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item-value">%value%</div><div class="item-delete"><button class="item-delete-btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+            html = '<div class="item" id="inc-%id%"><div class="item-description">%description%</div><div class="right"><div class="item-value">%value%</div><div class="item-delete"><button class="btn item-delete-btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
         } else if (type === 'exp') {
             element = DOMSelector.expenseList;
-            html = '<div class="item clearfix" id="exp-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item-value">%value%</div><div class="item-percentage">21%</div><div class="item-delete"><button class="item-delete-btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+            html = '<div class="item" id="exp-%id%"><div class="item-description">%description%</div><div class="right"><div class="item-value">%value%</div><div class="item-percentage">21%</div><div class="item-delete"><button class="btn item-delete-btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
         }
 
         html = html.replace('%id%', item.id)

@@ -16,7 +16,7 @@
         </article>
         <svg class="js-budget-chart"></svg>
     </section>
-    <section class="panel form-horizontal">
+    <section class="navbar-panel form-horizontal">
         <select class="js-add-type">
                 <option value="inc" selected>+</option>
                 <option value="exp">-</option>
@@ -26,8 +26,12 @@
         <button class="btn js-add-btn"><span class="icon check"></span>Add</button>
     </section>
     <section class="container">
-        <article class="column-1-2 js-income-list"></article>
-        <article class="column-1-2 js-expense-list"></article>
+        <article class="column-1-2 item-panel income js-income-list">
+            <h1>Incomes</h1>
+        </article>
+        <article class="column-1-2 item-panel expense js-expense-list">
+            <h1>Expenses</h1>
+        </article>
     </section>
     <script src="assets/scripts/d3.v4.min.js"></script>
     <script src="assets/scripts/liquid-fill-d3.js"></script>

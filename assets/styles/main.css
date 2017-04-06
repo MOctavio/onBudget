@@ -7,26 +7,72 @@ body {
     margin: 0px;
 }
 
+.right {
+    float: right;
+}
+
+.right>* {
+    display: inline-block;
+}
+
+.item>* {
+    display: inline-block;
+}
+
+.item {
+    color: gray;
+    font-size: 16px;
+    border-top: solid darkgray;
+    padding-top: 10px;
+}
+.item + .item {
+    margin-top: 10px;
+}
+
+.item-panel {
+    background-color: gainsboro;
+    border-radius: 3px;
+}
+
+.item-panel>h1 {
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.item-panel.income>h1 {
+    color: rgb(23, 161, 83);
+}
+
+.item-panel.expense>h1 {
+    color: rgb(159, 15, 33);
+}
+
+.item-value {
+    margin-right: 10px;
+}
+
 
 /* Grid */
 
 .container {
     margin: auto;
     max-width: 800px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding: 25px;
 }
 
 .column-1-2 {
     display: inline-block;
     float: left;
     position: relative;
-    width: 48%;
+    width: 46%;
+    padding: 10px;
 }
-.column-1-2 + .column-1-2 {
-    padding-left: 15px;
+
+.column-1-2+.column-1-2 {
+    margin-left: 15px;
 }
-.panel {
+
+.navbar-panel {
     background-color: rgb(37, 37, 37);
     height: 38px;
     line-height: 36px;
@@ -85,7 +131,7 @@ body {
 section.ribbon {
     background-color: rgb(37, 37, 37);
     border-radius: 0 0 8px 8px;
-    left: 22vw;
+    left: 18vw;
     padding: 15px;
     position: absolute;
     top: 0;
