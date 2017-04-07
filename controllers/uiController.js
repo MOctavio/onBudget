@@ -1,5 +1,6 @@
 var uIController = (function UIController() {
     var DOMSelector = {
+        budget: '.js-budget',
         inputType: '.js-add-type',
         inputDescription: '.js-add-description',
         inputValue: '.js-add-value',
@@ -10,8 +11,15 @@ var uIController = (function UIController() {
 
     var budgetChart = _initBudgetChart();
 
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
+
     function _updateChart(value) {
-        budgetChart.update(value);
+        budgetChart.update(value.percentage);
+        document.querySelector(DOMSelector.budget).innerHTML = formatter.format(value.budget);
     }
 
     function _addListItem(item, type) {
@@ -27,7 +35,7 @@ var uIController = (function UIController() {
 
         html = html.replace('%id%', item.id)
             .replace('%description%', item.description)
-            .replace('%value%', item.value);
+            .replace('%value%', formatter.format(item.value));
 
         document.querySelector(element).insertAdjacentHTML('beforeend', html);
     }

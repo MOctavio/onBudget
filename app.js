@@ -14,7 +14,7 @@ var appController = (function AppController(budgetController, uIController) {
 
     function updateBudget() {
         var budget = budgetController.getBudget();
-        uIController.updateChart(budget.percentage);
+        uIController.updateChart(budget);
     }
 
     function setupEventListeners() {
