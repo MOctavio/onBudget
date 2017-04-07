@@ -45,8 +45,16 @@ var uIController = (function UIController() {
         return {
             type: document.querySelector(DOMSelector.inputType).value,
             description: document.querySelector(DOMSelector.inputDescription).value,
-            value: document.querySelector(DOMSelector.inputValue).value
+            value: parseFloat(document.querySelector(DOMSelector.inputValue).value)
         };
+    }
+
+    function _validInput() {
+        if (document.querySelector(DOMSelector.inputDescription).value !== '' &&
+        !isNaN(document.querySelector(DOMSelector.inputValue).value) &&
+        document.querySelector(DOMSelector.inputValue).value > 0)
+            return true;
+        return false;
     }
 
     function _initBudgetChart() {
@@ -67,5 +75,6 @@ var uIController = (function UIController() {
         clearFields: _clearFields,
         getDOMSelector: _getDOMSelector,
         getInput: _getInput,
+        validInput: _validInput,
     };
 })();

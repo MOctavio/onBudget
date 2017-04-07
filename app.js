@@ -1,12 +1,19 @@
 var appController = (function AppController(budgetController, uIController) {
     function addItem(event) {
         event.preventDefault();
+        if(!uIController.validInput()) return;
+        
         var input,
             newItem;
         input = uIController.getInput();
         newItem = budgetController.addItem(input.type, input.description, input.value);
         uIController.addListItem(newItem, input.type);
         uIController.clearFields();
+        updateBudget();
+    }
+
+    function updateBudget() {
+
     }
 
     function setupEventListeners() {
@@ -24,6 +31,7 @@ var appController = (function AppController(budgetController, uIController) {
     function _init() {
         setupEventListeners();
     }
+
     return {
         init: _init
     };
