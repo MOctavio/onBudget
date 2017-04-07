@@ -16,7 +16,7 @@ class LiquidFillSettings {
         this.textColor = '#456'; // The color of the value text when the wave does not overlap it.
         this.textSize = 1; // The relative height of the text to display in the wave circle. 1 = 50%
         this.textVertPosition = .5; // The height at which to display the percentage text withing the wave circle. 0 = bottom, 1 = top.
-        this.valueCountUp = false; // If true, the displayed value counts up from 0 to it's final value upon loading. If false, the final value is displayed.
+        this.valueCountUp = true; // If true, the displayed value counts up from 0 to it's final value upon loading. If false, the final value is displayed.
         this.waveAnimate = true; // Controls if the wave scrolls or is static.
         this.waveAnimateTime = 18000; // The amount of time in milliseconds for a full wave to enter the wave circle.
         this.waveColor = '#78B'; // The color of the fill wave.
@@ -177,11 +177,13 @@ function loadLiquidFill(elementId, value, config) {
 
     // Make the value count up.
     if (config.valueCountUp) {
+        var format = d3.format(",d");
         var textTween = function() {
-            var i = d3.interpolate(this.textContent, textFinalValue);
+            var that = d3.select(this);
+            var i = d3.interpolate(that.text(), textFinalValue);
             return function(t) {
-                this.textContent = textRounder(i(t)) + percentText;
-            }
+                that.text(format(i(t)) + percentText);
+            };
         };
         text1.transition()
             .duration(config.waveRiseTime)
@@ -237,19 +239,22 @@ function loadLiquidFill(elementId, value, config) {
                 };
             }
 
-            var textTween = function() {
-                var i = d3.interpolate(this.textContent, parseFloat(value).toFixed(2));
-                return function(t) {
-                    this.textContent = textRounderUpdater(i(t)) + percentText;
-                }
-            };
 
+            var format = d3.format(",d");
+            var textTween = function() {
+                var that = d3.select(this);
+                var i = d3.interpolate(that.text(), newFinalValue);
+                return function(t) {
+                    that.text(format(i(t)) + percentText);
+                };
+            };
             text1.transition()
                 .duration(config.waveRiseTime)
                 .tween('text', textTween);
             text2.transition()
                 .duration(config.waveRiseTime)
                 .tween('text', textTween);
+
 
             var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value)) / config.maxValue;
             var waveHeight = fillCircleRadius * waveHeightScale(fillPercent * 100);
