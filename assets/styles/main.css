@@ -28,17 +28,16 @@ body {
     color: gray;
     font-size: 16px;
     border-top: solid darkgray;
-    padding-top: 10px;
-}
-
-.item+.item {
-    margin-top: 10px;
+    padding: 10px;
 }
 
 .item>div>div>button>i {
     visibility: hidden;
 }
 
+.item:hover{
+    background-color: lightgray;
+}
 .item:hover>div>div>button>i {
     visibility: visible;
 }
@@ -63,6 +62,14 @@ body {
 
 .item-value {
     margin-right: 10px;
+}
+
+.income>.item>.right>.item-value {
+    color: rgb(23, 161, 83);
+}
+
+.expense>.item>.right>.item-value {
+    color: rgb(159, 15, 33);
 }
 
 
