@@ -5,6 +5,11 @@ body {
     font-weight: lighter;
     line-height: 100%;
     margin: 0px;
+    overflow: hidden;
+}
+
+*:focus {
+    outline: none;
 }
 
 .right {
@@ -30,21 +35,29 @@ body {
     margin-top: 10px;
 }
 
+.item>div>div>button>i {
+    visibility: hidden;
+}
+
+.item:hover>div>div>button>i {
+    visibility: visible;
+}
+
 .item-panel {
     background-color: gainsboro;
     border-radius: 3px;
 }
 
-.item-panel>h1 {
+.item-panel>p {
     font-weight: normal;
     margin-top: 5px;
 }
 
-.item-panel.income>h1 {
+.item-panel.income>p {
     color: rgb(23, 161, 83);
 }
 
-.item-panel.expense>h1 {
+.item-panel.expense>p {
     color: rgb(159, 15, 33);
 }
 
@@ -56,9 +69,12 @@ body {
 /* Grid */
 
 .container {
+    height: 360px;
     margin: auto;
+    margin-top: 25px;
     max-width: 800px;
-    padding: 25px;
+    overflow: auto;
+    padding: 0 25px 25px 25px;
 }
 
 .column-1-2 {
@@ -81,6 +97,16 @@ body {
     text-align: center;
 }
 
+.small {
+    height: 12px;
+    width: 12px;
+}
+
+.large {
+    height: 28px;
+    width: 28px;
+}
+
 
 /* Buttons */
 
@@ -90,10 +116,17 @@ body {
     border-radius: .25rem;
     border: 1px solid rgba(0, 0, 0, .15);
     color: #464a4c;
+    cursor: pointer;
     font-size: 1rem;
     padding: .5rem .75rem;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     vertical-align: text-bottom;
+}
+
+.btn.btn-icon {
+    padding: 0px;
+    background: none;
+    border: none;
 }
 
 
@@ -102,18 +135,21 @@ body {
 .icon {
     background-repeat: no-repeat;
     display: inline-block;
-    height: 12px;
-    width: 12px;
+}
+
+.check {
+    background-image: url('../svg/check.svg'), none;
+    background-size: 100% 100%;
 }
 
 .add {
     background-image: url('../svg/add.svg'), none;
-    background-size: 12px 12px;
+    background-size: 100% 100%;
 }
 
 .delete {
     background-image: url('../svg/delete.svg'), none;
-    background-size: 12px 12px;
+    background-size: 100% 100%;
 }
 
 
