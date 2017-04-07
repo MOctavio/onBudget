@@ -9,7 +9,10 @@ var uIController = (function UIController() {
     };
 
     var budgetChart = _initBudgetChart();
-    // budgetChart.update(50);
+
+    function _updateChart(value) {
+        budgetChart.update(value);
+    }
 
     function _addListItem(item, type) {
         var html, element;
@@ -30,7 +33,8 @@ var uIController = (function UIController() {
     }
 
     function _clearFields() {
-        var fields = document.querySelectorAll(DOMSelector.inputDescription + ',' + DOMSelector.inputValue);
+        var fields = document
+            .querySelectorAll(DOMSelector.inputDescription + ',' + DOMSelector.inputValue);
         fields.forEach(function(element) {
             element.value = '';
         });
@@ -59,15 +63,15 @@ var uIController = (function UIController() {
 
     function _initBudgetChart() {
         var config = new LiquidFillSettings();
-        config.circleColor = 'rgb(23, 161, 83)';
+        config.circleColor = 'rgb(66, 73, 73)';
         config.circleThickness = 0.02;
-        config.textColor = 'rgb(23, 161, 83)';
+        config.textColor = 'rgb(66, 73, 73)';
         config.textVertPosition = 0.5;
         config.textSize = 0.6;
         config.waveAnimateTime = 4000;
         config.waveTextColor = 'gainsboro';
-        config.waveColor = 'rgb(23, 161, 83)';
-        return loadLiquidFill('.js-budget-chart', 75, config);
+        config.waveColor = 'rgb(66, 73, 73)';
+        return loadLiquidFill('.js-budget-chart', 0, config);
     }
 
     return {
@@ -75,6 +79,7 @@ var uIController = (function UIController() {
         clearFields: _clearFields,
         getDOMSelector: _getDOMSelector,
         getInput: _getInput,
+        updateChart: _updateChart,
         validInput: _validInput,
     };
 })();

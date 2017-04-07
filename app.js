@@ -2,7 +2,7 @@ var appController = (function AppController(budgetController, uIController) {
     function addItem(event) {
         event.preventDefault();
         if(!uIController.validInput()) return;
-        
+
         var input,
             newItem;
         input = uIController.getInput();
@@ -13,7 +13,8 @@ var appController = (function AppController(budgetController, uIController) {
     }
 
     function updateBudget() {
-
+        var budget = budgetController.getBudget();
+        uIController.updateChart(budget.percentage);
     }
 
     function setupEventListeners() {

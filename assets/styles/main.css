@@ -57,7 +57,7 @@ body {
 }
 
 .item-panel.expense>p {
-    color: rgb(159, 15, 33);
+    color: rgb(231, 76, 60);
 }
 
 .item-value {
@@ -69,7 +69,7 @@ body {
 }
 
 .expense>.item>.right>.item-value {
-    color: rgb(159, 15, 33);
+    color: rgb(231, 76, 60);
 }
 
 
