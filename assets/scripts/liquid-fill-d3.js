@@ -250,6 +250,5 @@ function liquidFill(_config, _elementId, _value) {
             waveGroup.transition().duration(config.waveRiseTime).attr('transform', 'translate(' + waveGroupXPosition + ',' + newHeight + ')')
         }
     }
-
     return new updater();
 }
