@@ -6,15 +6,15 @@ var uIController = (function UIController() {
         inputValue: '.js-add-value',
         btnAdd: '.js-add-btn',
         incomeList: '.js-income-list',
-        expenseList: '.js-expense-list',
+        expenseList: '.js-expense-list'
     };
 
     var budgetChart = _initBudgetChart();
 
     var formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
     });
 
     function _updateChart(value) {
@@ -23,7 +23,8 @@ var uIController = (function UIController() {
     }
 
     function _addListItem(item, type) {
-        var html, element;
+        var html,
+            element;
 
         if (type === 'inc') {
             element = DOMSelector.incomeList;
@@ -33,16 +34,13 @@ var uIController = (function UIController() {
             html = '<div class="item" id="exp-%id%"><div class="item-description">%description%</div><div class="right"><div class="item-value">%value%</div><div class="item-delete"><button class="btn btn-icon"><i class="icon small delete"></i></button></div></div></div>';
         }
 
-        html = html.replace('%id%', item.id)
-            .replace('%description%', item.description)
-            .replace('%value%', formatter.format(item.value));
+        html = html.replace('%id%', item.id).replace('%description%', item.description).replace('%value%', formatter.format(item.value));
 
         document.querySelector(element).insertAdjacentHTML('beforeend', html);
     }
 
     function _clearFields() {
-        var fields = document
-            .querySelectorAll(DOMSelector.inputDescription + ',' + DOMSelector.inputValue);
+        var fields = document.querySelectorAll(DOMSelector.inputDescription + ',' + DOMSelector.inputValue);
         fields.forEach(function(element) {
             element.value = '';
         });
@@ -62,24 +60,22 @@ var uIController = (function UIController() {
     }
 
     function _validInput() {
-        if (document.querySelector(DOMSelector.inputDescription).value !== '' &&
-        !isNaN(document.querySelector(DOMSelector.inputValue).value) &&
-        document.querySelector(DOMSelector.inputValue).value > 0)
+        if (document.querySelector(DOMSelector.inputDescription).value !== '' && !isNaN(document.querySelector(DOMSelector.inputValue).value) && document.querySelector(DOMSelector.inputValue).value > 0)
             return true;
         return false;
     }
 
     function _initBudgetChart() {
-        var config = new LiquidFillSettings();
-        config.circleColor = 'rgb(66, 73, 73)';
-        config.circleThickness = 0.02;
-        config.textColor = 'rgb(66, 73, 73)';
-        config.textVertPosition = 0.5;
-        config.textSize = 0.6;
-        config.waveAnimateTime = 4000;
-        config.waveTextColor = 'gainsboro';
-        config.waveColor = 'rgb(66, 73, 73)';
-        return loadLiquidFill('.js-budget-chart', 0, config);
+        return liquidFill({
+            circleColor: 'rgb(66, 73, 73)',
+            circleThickness: 0.02,
+            textColor: 'rgb(66, 73, 73)',
+            textVertPosition: 0.5,
+            textSize: 0.6,
+            waveAnimateTime: 4000,
+            waveTextColor: 'gainsboro',
+            waveColor: 'rgb(66, 73, 73)'
+        }, '.js-budget-chart', 0);
     }
 
     return {
@@ -88,6 +84,6 @@ var uIController = (function UIController() {
         getDOMSelector: _getDOMSelector,
         getInput: _getInput,
         updateChart: _updateChart,
-        validInput: _validInput,
+        validInput: _validInput
     };
 })();
