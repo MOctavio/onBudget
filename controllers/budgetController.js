@@ -1,5 +1,5 @@
-var budgetController = (function BudgetController() {
-    var data = {
+const budgetController = (function BudgetController() {
+    let data = {
         budget: 0,
         items: {
             inc: [],
@@ -11,19 +11,19 @@ var budgetController = (function BudgetController() {
             exp: 0
         }
     };
-    var Expense = function(id, description, value) {
+    const Expense = function(id, description, value) {
         this.id = id;
         this.description = description;
         this.value = value;
     };
-    var Income = function(id, description, value) {
+    const Income = function(id, description, value) {
         this.id = id;
         this.description = description;
         this.value = value;
     };
 
     function _addItem(type, description, value) {
-        var newItem,
+        let newItem,
             id = 0;
         // New id base on last id number
         if (data.items[type].length)
@@ -39,15 +39,15 @@ var budgetController = (function BudgetController() {
         return newItem;
     }
 
-    var calculateTotal = function(type) {
-        var total = 0;
-        data.items[type].forEach(function functionName(item) {
-            total += item.value;
-        });
+    const calculateTotal = function(type) {
+        let total = 0;
+        data.items[type].forEach(item =>
+            total += item.value
+        );
         data.totals[type] = total;
     };
 
-    var calculateBudget = function() {
+    const calculateBudget = function() {
         calculateTotal('inc');
         calculateTotal('exp');
         data.budget = data.totals.inc - data.totals.exp;

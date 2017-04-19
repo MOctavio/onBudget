@@ -1,25 +1,30 @@
-var appController = (function AppController(budgetController, uIController) {
+const appController = (function AppController(budgetController, uIController) {
     function addItem(event) {
         event.preventDefault();
-        if(!uIController.validInput()) return;
+        if (!uIController.validInput())
+            return;
 
-        var input,
-            newItem;
-        input = uIController.getInput();
-        newItem = budgetController.addItem(input.type, input.description, input.value);
+        let input = uIController.getInput();
+        let newItem = budgetController.addItem(input.type, input.description, input.value);
         uIController.addListItem(newItem, input.type);
         uIController.clearFields();
         updateBudget();
     }
 
+    function deleteItem(event) {
+        let item = event.target.parentNode.parentNode.parentNode.parentNode;
+        console.log(item.id, item.dataset.type);
+    }
+
     function updateBudget() {
-        var budget = budgetController.getBudget();
+        let budget = budgetController.getBudget();
         uIController.updateChart(budget);
     }
 
     function setupEventListeners() {
-        var DOMSelector = uIController.getDOMSelector();
+        let DOMSelector = uIController.getDOMSelector();
 
+        document.querySelector(DOMSelector.eventListener).addEventListener('click', deleteItem);
         document.querySelector(DOMSelector.btnAdd).addEventListener('click', addItem);
         document.querySelector(DOMSelector.inputValue).addEventListener('keypress', function(e) {
             if (e.keyCode == 13) {
@@ -33,9 +38,7 @@ var appController = (function AppController(budgetController, uIController) {
         setupEventListeners();
     }
 
-    return {
-        init: _init
-    };
+    return {init: _init};
 })(budgetController, uIController);
 
 appController.init();
