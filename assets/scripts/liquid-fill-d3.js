@@ -5,7 +5,8 @@
     All rights reserved.
 */
 /*
-    Code updated to D3v4
+    Updated to D3v4
+    Code refactored
 */
 
 function liquidFill(_config, _elementId, _value) {
@@ -70,17 +71,25 @@ function liquidFill(_config, _elementId, _value) {
   let circleArc = d3.arc().startAngle(circleX(0)).endAngle(circleX(1)).outerRadius(circleY(radius)).innerRadius(circleY(radius - circleThickness));
   elementContainer.append('path').attr('d', circleArc).style('fill', config.circleColor).attr('transform', 'translate(' + radius + ',' + radius + ')');
 
+  // Display text and wave text overlay
+  let textElement = {};
+
   // Text where the wave does not overlap.
-  let text1 = elementContainer.append('text').text(textRounder(textStartValue) + percentText).attr('class', 'liquidFillGaugeText').attr('text-anchor', 'middle').attr('font-size', textPixels + 'px').style('fill', config.textColor).attr('transform', 'translate(' + radius + ',' + textRiseScaleY(config.textVertPosition) + ')');
+  textElement.text1 = setText(
+    config.textColor,
+    elementContainer,
+    textPixels,
+    percentText,
+    radius,
+    textStartValue,
+    config.textVertPosition);
 
   // The clipping wave area.
-  let clipArea = d3.area().x(function(d) {
-    return waveScaleX(d.x);
-  }).y0(function(d) {
-    return waveScaleY(Math.sin(Math.PI * 2 * config.waveOffset * -1 + Math.PI * 2 * (1 - config.waveCount) + d.y * 2 * Math.PI));
-  }).y1(function(d) {
-    return (fillCircleRadius * 2 + waveHeight);
-  });
+  let clipArea = d3.area()
+    .x(d => waveScaleX(d.x))
+    .y0(d => waveScaleY(Math.sin(Math.PI * 2 * config.waveOffset * -1 + Math.PI * 2 * (1 - config.waveCount) + d.y * 2 * Math.PI)))
+    .y1(d => (fillCircleRadius * 2 + waveHeight));
+
   let waveGroup = elementContainer.append('defs').append('clipPath').attr('id', 'clipWave' + elementId);
   let wave = waveGroup.append('path').datum(clipData).attr('d', clipArea).attr('T', 0);
 
@@ -89,20 +98,35 @@ function liquidFill(_config, _elementId, _value) {
   fillCircleGroup.append('circle').attr('cx', radius).attr('cy', radius).attr('r', fillCircleRadius).style('fill', config.waveColor);
 
   // Text where the wave does overlap.
-  let text2 = fillCircleGroup.append('text').text(textRounder(textStartValue) + percentText).attr('class', 'liquidFillGaugeText').attr('text-anchor', 'middle').attr('font-size', textPixels + 'px').style('fill', config.waveTextColor).attr('transform', 'translate(' + radius + ',' + textRiseScaleY(config.textVertPosition) + ')');
+  textElement.text2 = setText(
+    config.waveTextColor,
+    fillCircleGroup,
+    textPixels,
+    percentText,
+    radius,
+    textStartValue,
+    config.textVertPosition);
 
   // Make the value count up.
   if (config.valueCountUp) {
-    let format = d3.format(",d");
-    let textTween = function() {
+    for (let element of Object.values(textElement)) {
+      textTweenTransition(element, textTween, textFinalValue, config.waveRiseTime);
+    }
+  }
+
+  function textTween(value) {
+    return function() {
+      let format = d3.format(",d");
       let that = d3.select(this);
-      let i = d3.interpolate(that.text(), textFinalValue);
+      let i = d3.interpolate(that.text(), value);
       return function(t) {
         that.text(format(i(t)) + percentText);
       };
-    };
-    text1.transition().duration(config.waveRiseTime).tween('text', textTween);
-    text2.transition().duration(config.waveRiseTime).tween('text', textTween);
+    }
+  };
+
+  function textTweenTransition(element, textTween, textValue, waveRiseTime) {
+    element.transition().duration(waveRiseTime).tween('text', textTween(textValue));
   }
 
   // Make the wave rise. wave and waveGroup are separate so that horizontal and vertical movement can be controlled independently.
@@ -130,33 +154,24 @@ function liquidFill(_config, _elementId, _value) {
     return Math.max(config.minValue, Math.min(config.maxValue, value)) / config.maxValue;
   }
 
+  function setText(color, element, fontSize, percent, radius, startValue, verticalPosition) {
+    return element
+      .append('text')
+      .text(textRounder(startValue) + percent)
+      .attr('class', 'liquidFillGaugeText')
+      .attr('text-anchor', 'middle')
+      .attr('font-size', fontSize + 'px')
+      .style('fill', color)
+      .attr('transform', 'translate(' + radius + ',' + textRiseScaleY(verticalPosition) + ')');
+  }
   function updater() {
     this.update = function(value) {
       let newFinalValue = parseFloat(value).toFixed(2);
-      let textRounderUpdater = function(value) {
-        return Math.round(value);
-      };
-      if (parseFloat(newFinalValue) != parseFloat(textRounderUpdater(newFinalValue))) {
-        textRounderUpdater = function(value) {
-          return parseFloat(value).toFixed(1);
-        };
-      }
-      if (parseFloat(newFinalValue) != parseFloat(textRounderUpdater(newFinalValue))) {
-        textRounderUpdater = function(value) {
-          return parseFloat(value).toFixed(2);
-        };
-      }
+      let textRounder = setTextRounder(newFinalValue);
 
-      let format = d3.format(",d");
-      let textTween = function() {
-        let that = d3.select(this);
-        let i = d3.interpolate(that.text(), newFinalValue);
-        return function(t) {
-          that.text(format(i(t)) + percentText);
-        };
-      };
-      text1.transition().duration(config.waveRiseTime).tween('text', textTween);
-      text2.transition().duration(config.waveRiseTime).tween('text', textTween);
+      for (let element of Object.values(textElement)) {
+        textTweenTransition(element, textTween, newFinalValue, config.waveRiseTime);
+      }
 
       let fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value)) / config.maxValue;
       let waveHeight = fillCircleRadius * waveHeightScale(fillPercent * 100);
