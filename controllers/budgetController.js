@@ -33,6 +33,8 @@ const budgetController = (function BudgetController() {
         calculateTotal('exp');
         data.budget = data.totals.inc - data.totals.exp;
         data.percentage = 100 - Math.round(data.totals.exp / data.totals.inc * 100);
+        // Provides some validation for %display
+        if (!isFinite(data.percentage)) data.percentage = 0;
     };
 
     function _addItem(type, description, value) {
