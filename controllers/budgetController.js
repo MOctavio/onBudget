@@ -22,6 +22,19 @@ const budgetController = (function BudgetController() {
         this.value = value;
     };
 
+    const calculateTotal = function(type) {
+        let total = 0;
+        data.items[type].forEach(item => total += item.value);
+        data.totals[type] = total;
+    };
+
+    const calculateBudget = function() {
+        calculateTotal('inc');
+        calculateTotal('exp');
+        data.budget = data.totals.inc - data.totals.exp;
+        data.percentage = 100 - Math.round(data.totals.exp / data.totals.inc * 100);
+    };
+
     function _addItem(type, description, value) {
         let newItem,
             id = 0;
@@ -39,33 +52,14 @@ const budgetController = (function BudgetController() {
         return newItem;
     }
 
-    const calculateTotal = function(type) {
-        let total = 0;
-        data.items[type].forEach(item =>
-            total += item.value
-        );
-        data.totals[type] = total;
-    };
-
-    const calculateBudget = function() {
-        calculateTotal('inc');
-        calculateTotal('exp');
-        data.budget = data.totals.inc - data.totals.exp;
-        data.percentage = 100 - Math.round(data.totals.exp / data.totals.inc * 100);
-    };
+    function _deleteItem(type, id) {
+        data.items[type] = data.items[type].filter((item)=> item.id != id);
+    }
 
     function _getBudget() {
         calculateBudget();
-        return {
-            budget: data.budget,
-            expenses: data.totals.exp,
-            incomes: data.totals.inc,
-            percentage: data.percentage,
-        };
+        return {budget: data.budget, expenses: data.totals.exp, incomes: data.totals.inc, percentage: data.percentage};
     }
 
-    return {
-        addItem: _addItem,
-        getBudget: _getBudget
-    };
+    return {addItem: _addItem, deleteItem: _deleteItem, getBudget: _getBudget};
 })();

@@ -29,10 +29,10 @@ const uIController = (function UIController() {
 
         if (type === 'inc') {
             element = DOMSelector.incomeList;
-            html = '<div class="item" id="inc-%id%" data-type="inc"><div class="item-description">%description%</div><div class="right"><div class="item-value">%value%</div><div class="item-delete"><button class="btn btn-icon"><i class="icon small delete"></i></button></div></div></div>';
+            html = '<div class="item" id="inc-%id%"><div class="item-description">%description%</div><div class="right"><div class="item-value">%value%</div><div class="item-delete"><button class="btn btn-icon"><i class="icon small delete"></i></button></div></div></div>';
         } else if (type === 'exp') {
             element = DOMSelector.expenseList;
-            html = '<div class="item" id="exp-%id%" data-type="exp"><div class="item-description">%description%</div><div class="right"><div class="item-value">%value%</div><div class="item-delete"><button class="btn btn-icon"><i class="icon small delete"></i></button></div></div></div>';
+            html = '<div class="item" id="exp-%id%"><div class="item-description">%description%</div><div class="right"><div class="item-value">%value%</div><div class="item-delete"><button class="btn btn-icon"><i class="icon small delete"></i></button></div></div></div>';
         }
 
         html = html.replace('%id%', item.id)
@@ -40,6 +40,10 @@ const uIController = (function UIController() {
           .replace('%value%', formatter.format(item.value));
 
         document.querySelector(element).insertAdjacentHTML('beforeend', html);
+    }
+
+    function _removeListItem(element) {
+        element.remove();
     }
 
     function _clearFields() {
@@ -85,6 +89,7 @@ const uIController = (function UIController() {
 
     return {
         addListItem: _addListItem,
+        removeListItem: _removeListItem,
         clearFields: _clearFields,
         getDOMSelector: _getDOMSelector,
         getInput: _getInput,

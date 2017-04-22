@@ -12,8 +12,14 @@ const appController = (function AppController(budgetController, uIController) {
     }
 
     function deleteItem(event) {
-        let item = event.target.parentNode.parentNode.parentNode.parentNode;
-        console.log(item.id, item.dataset.type);
+        let element = event.target.parentNode.parentNode.parentNode.parentNode;
+        if (!element) return;
+
+        let type, id;
+        [type, id] = element.id.split('-');
+        budgetController.deleteItem(type, id);
+        uIController.removeListItem(element);
+        updateBudget();
     }
 
     function updateBudget() {
