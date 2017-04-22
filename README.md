@@ -9,5 +9,5 @@ Given the simplicity involved you can open the index.html straight from your fil
 ## About the app
 OnBudget allows you to input incomes and expenses live, so that you can see how much budget you have left.
 
-###Preview
-![Onbudget App](https://github.com/MOctavio/onBudget/blob/master/src/assets/img/screen-capture.png?raw=true "OnBudget App")
+### Preview
+![Onbudget App](https://github.com/MOctavio/onBudget/blob/master/assets/img/screen-capture.png?raw=true "OnBudget App")
